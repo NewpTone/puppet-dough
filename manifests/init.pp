@@ -73,6 +73,10 @@ class dough(
 			rabbitmq_user			=> $rabbitmq_user,
 			rabbitmq_passwd			=> $rabbitmq_passwd,
 			loglevel				=> $dough_loglevel,
+			nova_db_username       => $nova_db_username,
+			nova_db_passwd         => $nova_db_passwd,
+			nova_db_host           => $nova_db_host,
+			nova_db_name           => $nova_db_name,
 			},
 			order	=> '01',
 	}	
