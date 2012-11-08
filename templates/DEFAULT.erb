@@ -6,7 +6,7 @@ dough_user_composite_port = 8098
 dough_admin_composite_port = 8099
 # Example sql_connection=mysql://someuser:somepasswd@localhost/dough
 sql_connection=<%=sql_connection%>
-nova_sql_connection="mysql://<%=nova_db_user%>:<%=nova_db_passwd%>@<%=nova_db_host%>/<%=nova_db_name%>"
+nova_sql_connection="mysql://<%=nova_db_usename%>:<%=nova_db_passwd%>@<%=nova_db_host%>/<%=nova_db_name%>"
 region = <%=region%>
 dough_token=<%=dough_token%>
 memcache= <%=memcache%>
@@ -21,4 +21,4 @@ migrate_databases=<%=migrate_databases%>
 rabbitmq_addr=<%=rabbitmq_addr%>
 rabbitmq_user=<%=rabbitmq_user%>
 rabbitmq_passwd=<%=rabbitmq_passwd%>
-loglevel=<%=loglevel%>
+loglevel=<%=dough_loglevel%>
