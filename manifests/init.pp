@@ -9,7 +9,7 @@ class dough(
 	$dough_db_host			= '127.0.0.1',
 	$dough_db_name			= 'dough',
 	$sql_connection			= '',
-#	$nova_sql_connection	= '',
+	$nova_sql_connection	= '',
 # Default setting
 	$listen					= '0.0.0.0',
 	$host					= '127.0.0.1',
@@ -26,7 +26,7 @@ class dough(
 	$rabbitmq_addr			= '127.0.0.1',
 	$rabbitmq_user			= 'rabbitmq_user',
 	$rabbitmq_passwd		= 'rabbitmq_passwd',
-	$loglevel				= 'info',
+	$dough_loglevel				= 'info',
 # dough setting
 # deduct setting
 	$cachetime				= '5',
@@ -72,7 +72,7 @@ class dough(
 			rabbitmq_addr			=> $rabbitmq_addr,
 			rabbitmq_user			=> $rabbitmq_user,
 			rabbitmq_passwd			=> $rabbitmq_passwd,
-			loglevel				=> $loglevel,
+			loglevel				=> $dough_loglevel,
 			},
 			order	=> '01',
 	}	
