@@ -26,7 +26,7 @@ class dough(
 	$rabbitmq_addr			= '127.0.0.1',
 	$rabbitmq_user			= 'rabbitmq_user',
 	$rabbitmq_passwd		= 'rabbitmq_passwd',
-	$dough_loglevel			= 'info',
+	$dough_loglevel			= 'INFO',
 # dough setting
 # deduct setting
 	$cachetime				= '5',
