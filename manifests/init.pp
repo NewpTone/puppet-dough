@@ -26,7 +26,7 @@ class dough(
 	$rabbitmq_addr			= '127.0.0.1',
 	$rabbitmq_user			= 'rabbitmq_user',
 	$rabbitmq_passwd		= 'rabbitmq_passwd',
-	$dough_loglevel				= 'info',
+	$dough_loglevel			= 'info',
 # dough setting
 # deduct setting
 	$cachetime				= '5',
@@ -35,6 +35,10 @@ class dough(
 	$admin_token,
 ){
   include 'concat::setup'
+
+  package { 'deduct':
+	ensure => present
+  }
 
   package { 'dough-common':
 	ensure	=> present,
@@ -73,10 +77,10 @@ class dough(
 			rabbitmq_user			=> $rabbitmq_user,
 			rabbitmq_passwd			=> $rabbitmq_passwd,
 			loglevel				=> $dough_loglevel,
-			nova_db_username       => $nova_db_username,
-			nova_db_passwd         => $nova_db_passwd,
-			nova_db_host           => $nova_db_host,
-			nova_db_name           => $nova_db_name,
+			nova_db_username        => $nova_db_username,
+			nova_db_passwd          => $nova_db_passwd,
+			nova_db_host            => $nova_db_host,
+			nova_db_name            => $nova_db_name,
 			},
 			order	=> '01',
 	}	
@@ -96,4 +100,10 @@ class dough(
 			},
 			order	=> '04',
 	}
+
+	file {'/usr/lib/python2.7/dist-packages/dough/region.py':
+		ensure  => 'present',
+		content => template("dough/region.py.example.erb"),
+		require => Package['dough-common'],
+		}
  }
