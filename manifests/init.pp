@@ -35,7 +35,8 @@ class dough(
 	$admin_token,
 # region.py.example.erb setting
 	$default_region			= 'http://127.0.0.1:35357/v2.0/',
-	$dough_hash				= ['"RegionOne":"http://127.0.0.1:35357/v2.0/"'],
+	$region_name			= "RegionOne",
+	$region_endpoint		= "http://127.0.0.1:35357/v2.0/"
 ){
   include 'concat::setup'
 
