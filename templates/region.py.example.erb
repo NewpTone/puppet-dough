@@ -21,7 +21,6 @@
 region_list = {
     "default": "<%= default_region %>",
 	<% dough_hash.each do |key,value| -%>
-	<%if value != "undef" -%>
     "<%= key -%>" : "<%= value %>"
 	<% end -%> 
 }
