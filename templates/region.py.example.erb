@@ -20,8 +20,8 @@
 
 region_list = {
     "default": "<%= default_region %>",
-	<% dough_hash.each do |key,value| -%>
-    "<%= key -%>" : "<%= value %>"
+	<% dough_hash.each do |value| -%>
+    <%= value %>
 	<% end -%> 
 }
 
