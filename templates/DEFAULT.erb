@@ -1,24 +1,32 @@
 [DEFAULT]
-log=/var/log/dough/dough-api.log
-host = <%=host%>
-listen = <%=listen%>
-dough_user_composite_port = 8098
-dough_admin_composite_port = 8099
-# Example sql_connection=mysql://someuser:somepasswd@localhost/dough
+verbose = True
+
+## log setting
+logdir=/var/log/dough
+
+## api server
+api_paste_config = /etc/dough/api-paste.ini
+api_listen = <%= api_listen %>
+api_listen_port = 8098
+
+## database access url
+migrate_url=<%=migrate_url%>
+migrate_databases=<%=migrate_databases%>
 sql_connection=<%=sql_connection%>
 nova_sql_connection="mysql://<%=nova_db_username%>:<%=nova_db_passwd%>@<%=nova_db_host%>/<%=nova_db_name%>"
-region = <%=region%>
-dough_token=<%=dough_token%>
-memcache= <%=memcache%>
+
+# keystone setting
 keystone_username=<%=keystone_username%>
 keystone_password=<%=keystone_password%>
 keystone_tenant_name=<%=keystone_tenant_name%>
 keystone_auth_url=<%=keystone_auth_url%>
+region = <%=region%>
 purchases_buffer=<%=purchases_buffer%>
-# Example migrate_url=mysql://root:nova@localhost/
-migrate_url=<%=migrate_url%>
-migrate_databases=<%=migrate_databases%>
+
+# RabbitMQ setting
 rabbitmq_addr=<%=rabbitmq_addr%>
 rabbitmq_user=<%=rabbitmq_user%>
 rabbitmq_passwd=<%=rabbitmq_passwd%>
-loglevel=<%=dough_loglevel%>
+
+## memcache setting
+memcache= <%=memcache%>
