@@ -11,10 +11,8 @@ class dough(
 	$sql_connection			= '',
 	$nova_sql_connection	= '',
 # Default setting
-	$listen					= '0.0.0.0',
-	$host					= '127.0.0.1',
+	$api_listen				= '0.0.0.0',
 	$region					= 'regionone',
-	$dough_token			= 'admin',
 	$memcache				= '127.0.0.1:11211',
 	$keystone_username		= 'keystone',
 	$keystone_password		= 'keystone',
@@ -26,23 +24,12 @@ class dough(
 	$rabbitmq_addr			= '127.0.0.1',
 	$rabbitmq_user			= 'rabbitmq_user',
 	$rabbitmq_passwd		= 'rabbitmq_passwd',
-	$dough_loglevel			= 'INFO',
-# dough setting
-# deduct setting
-	$cachetime				= '5',
-# filter:auth setting
-	$auth_host				= '0.0.0.0',
-	$admin_token,
 # region.py.example.erb setting
 	$default_region			= 'http://127.0.0.1:35357/v2.0/',
 	$region_name			= "RegionOne",
 	$region_endpoint		= "http://127.0.0.1:35357/v2.0/"
 ){
   include 'concat::setup'
-
-  package { 'deduct':
-	ensure => present
-  }
 
   package { 'dough-common':
 	ensure	=> present,
@@ -65,8 +52,7 @@ class dough(
 #Config set 
 	dough::config {'DEFAULT':
 		config => {
-		    listen					=> $listen,	
-			host					=> $host,
+		    api_listen				=> $api_listen,	
 			sql_connection			=> $sql_connection,
 			nova_sql_connection		=> $sql_connection,
 			memcache				=> $memcache,
@@ -80,7 +66,6 @@ class dough(
 			rabbitmq_addr			=> $rabbitmq_addr,
 			rabbitmq_user			=> $rabbitmq_user,
 			rabbitmq_passwd			=> $rabbitmq_passwd,
-			loglevel				=> $dough_loglevel,
 			nova_db_username        => $nova_db_username,
 			nova_db_passwd          => $nova_db_passwd,
 			nova_db_host            => $nova_db_host,
@@ -88,25 +73,9 @@ class dough(
 			},
 			order	=> '01',
 	}	
-	dough::config {'dough':
-			order	=> '02',
-	}
-	dough::config {'deduct':
-		config => {
-			cachetime	=> $cachetime,
-			},
-			order	=> '03',
-	}		
-	dough::config {'auth':
-		config => {
-			auth_host		=> $auth_host,
-			admin_token		=> $admin_token,
-			},
-			order	=> '04',
-	}
 
 	file {'/usr/lib/python2.7/dist-packages/dough/region.py':
-		ensure  => 'present',
+		ensure  => present,
 		content => template("dough/region.py.example.erb"),
 		require => Package['dough-common'],
 		}
