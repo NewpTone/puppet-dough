@@ -54,7 +54,7 @@ class dough(
 		config => {
 		    api_listen				=> $api_listen,	
 			sql_connection			=> $sql_connection,
-			nova_sql_connection		=> $sql_connection,
+			nova_sql_connection		=> $nova_sql_connection,
 			memcache				=> $memcache,
 			keystone_username		=> $keystone_username,
 			keystone_password		=> $keystone_password,
