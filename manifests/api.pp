@@ -3,8 +3,13 @@ class dough::api(
     $admin_tenant_name  = 'services',
     $admin_user         = 'dough',
     $admin_password     = 'dough',
+    )
  {
-  package { "dough-api":
-    ensure => 'present',
-  } 
+     package { "dough-api":
+        ensure => 'present',
+            } 
+     file {"/etc/dough/api-paste.ini":
+        content => template('dough/api-paste.ini.erb'),
+        require => Package['dough-api'],
+        }
 }
