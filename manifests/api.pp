@@ -6,10 +6,14 @@ class dough::api(
     )
  {
      package { "dough-api":
-        ensure => 'present',
+        ensure => present,
             } 
      file {"/etc/dough/api-paste.ini":
         content => template('dough/api-paste.ini.erb'),
         require => Package['dough-api'],
+        }
+     service {"dough-api-server":
+        ensure  => present,
+        require => Package['dough-api']
         }
 }
