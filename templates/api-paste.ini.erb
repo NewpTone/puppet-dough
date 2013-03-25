@@ -1,0 +1,30 @@
+[composite:dough_api]
+use = egg:Paste#urlmap
+/: versions
+/v2.0: dough_api_composite
+
+[composite:dough_api_composite]
+use = call:dough.service:dough_pipeline_factory
+keystone = faultwrap authtoken keystonecontext dough_api_app
+
+[filter:faultwrap]
+paste.filter_factory = dough.service:FaultWrapper.factory
+
+[filter:authtoken]
+paste.filter_factory = keystone.middleware.auth_token:filter_factory
+auth_host = <%=auth_host%>
+auth_port = 35357
+auth_protocol = http
+admin_tenant_name = <%=admin_tenant_name%>
+admin_user = <%=admin_user%>
+admin_password = <%=admin_password%>
+signing_dir = /var/cache/dough
+
+[filter:keystonecontext]
+paste.filter_factory = dough.service:DoughKeystoneContext.factory
+
+[app:versions]
+paste.app_factory = dough.service.version:app_factory
+
+[app:dough_api_app]
+paste.app_factory = dough.service:dough_api_factory
